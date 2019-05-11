@@ -73,7 +73,7 @@ def from_yahoo_ids(ids):
     return c.from_yahoo_ids(ids)
 
 
-def from_cbs_ids(self, ids):
+def from_cbs_ids(ids):
     """Lookup given a list of CBS IDs
 
     Accepts a list of IDs from CBS fantasy baseball.  It will return a
