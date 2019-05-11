@@ -1,8 +1,16 @@
 from setuptools import setup
 
+
+def readme():
+    with open('README.rst') as f:
+        return f.read()
+
+
 setup(name='baseball_id',
-      version='0.0.1',
-      description='Lookup a players to find their ID at various data sources',
+      version='0.0.2',
+      description='Lookup baseball players by their ID at various data ' +
+                  'sources like MLB, Yahoo!, CBS, ESPN, and FanGraphs.',
+      long_description=readme(),
       url='http://github.com/spilchen/baseball_id',
       author='Matt Spilchen',
       author_email='matt.spilchen@gmail.com',
