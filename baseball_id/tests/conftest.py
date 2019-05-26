@@ -1,13 +1,9 @@
 #!/bin/python
 
 import pytest
-from baseball_id import lookup
-import os
+from baseball_id.factory import Factory
 
 
 @pytest.fixture()
 def lookup_obj():
-    lk = lookup.Cache()
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    lk.set_source("{}/sample.master.csv".format(dir_path))
-    yield lk
+    yield Factory.create_fake()

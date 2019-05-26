@@ -44,9 +44,9 @@ Sample API Usage
 
 ::
 
-  In [1]: from baseball_id import lookup
-  
-  In [2]: lookup.from_mlb_ids([430945, 607680, 669456])
+  In [1]: from baseball_id import Lookup
+
+  In [2]: Lookup.from_mlb_ids([430945, 607680, 669456])
   Out[2]:
         mlb_id      mlb_name mlb_pos mlb_team         mlb_team_long  ...  ottoneu_name ottoneu_pos  rotowire_id  rotowire_name rotowire_pos
   39    430945    Adam Jones      CF      ARI  Arizona Diamondbacks  ...    Adam Jones          OF       8165.0     Adam Jones           OF
@@ -55,7 +55,7 @@ Sample API Usage
   
   [3 rows x 35 columns]
   
-  In [3]: lookup.from_yahoo_ids([10794, 9542, 7578])
+  In [3]: Lookup.from_yahoo_ids([10794, 9542, 7578])
   Out[3]:
         mlb_id        mlb_name mlb_pos mlb_team  ... ottoneu_pos rotowire_id   rotowire_name  rotowire_pos
   5     621345     A.J. Minter       P      ATL  ...          RP     13889.0     A.J. Minter             P
@@ -64,7 +64,7 @@ Sample API Usage
   
   [3 rows x 35 columns]
   
-  In [4]: lookup.from_cbs_ids([1660162, 2507367])
+  In [4]: Lookup.from_cbs_ids([1660162, 2507367])
   Out[4]:
         mlb_id      mlb_name mlb_pos mlb_team         mlb_team_long  ...  ottoneu_name ottoneu_pos  rotowire_id  rotowire_name rotowire_pos
   423   457763  Buster Posey       C       SF  San Francisco Giants  ...  Buster Posey        C/1B      10426.0   Buster Posey            C
@@ -72,18 +72,17 @@ Sample API Usage
   
   [2 rows x 35 columns]
   
-  In [5]: lookup.from_espn_ids([29252])
+  In [5]: Lookup.from_espn_ids([29252])
   Out[5]:
        mlb_id       mlb_name mlb_pos mlb_team        mlb_team_long  ...   ottoneu_name ottoneu_pos  rotowire_id  rotowire_name rotowire_pos
   836  451594  Dexter Fowler      RF      STL  St. Louis Cardinals  ...  Dexter Fowler          OF       8271.0  Dexter Fowler           OF
   
   [1 rows x 35 columns]
   
-  In [6]: lookup.from_fangraphs_ids([19753, 19566])
+  In [6]: Lookup.from_fangraphs_ids([19753, 19566])
   Out[6]:
         mlb_id           mlb_name mlb_pos mlb_team  ... ottoneu_pos rotowire_id      rotowire_name  rotowire_pos
   1510  642528  Jonathan Loaisiga       P      NYY  ...       SP/RP     15256.0  Jonathan Loaisiga             P
   2133  663993          Nate Lowe      1B       TB  ...          1B         NaN                NaN           NaN
   
   [2 rows x 35 columns]
-
