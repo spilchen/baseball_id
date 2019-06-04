@@ -61,3 +61,27 @@ def test_lookup_by_fangraphs_ids(lookup_obj):
     assert(s.iloc[1].mlb_name == 'Thairo Estrada')
     assert(s.iloc[1].fg_id == 'sa739620')
     assert(s.iloc[1].mlb_id == 642731)
+
+
+def test_lookup_by_name(lookup_obj):
+    s = lookup_obj.from_names(['Jose Ramirez'])
+    print(s)
+    assert(len(s) == 2)
+    assert(s.iloc[0].mlb_team == 'ATL')
+    assert(s.iloc[0].mlb_pos == 'P')
+    assert(s.iloc[1].mlb_team == 'CLE')
+    assert(s.iloc[1].mlb_pos == '3B')
+
+
+def test_lookup_by_name_multi(lookup_obj):
+    s = lookup_obj.from_names(['Khris Davis', 'Enrique Hernandez'])
+    print(s)
+    assert(len(s) == 2)
+    assert(s.iloc[0].mlb_name == 'Enrique Hernandez')
+    assert(s.iloc[1].ottoneu_name == 'Khristopher Davis')
+
+
+def test_lookup_by_name_empty(lookup_obj):
+    s = lookup_obj.from_names(['Joe Baseball'])
+    print(s)
+    assert(len(s) == 0)

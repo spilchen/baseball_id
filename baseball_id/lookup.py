@@ -163,3 +163,34 @@ class Cache:
         # the input IDs to strings so that it finds the all numeric ones.
         ids_as_str = [str(i) for i in ids]
         return self.df[self.df.fg_id.isin(ids_as_str)]
+
+    def from_names(self, names):
+        """Lookup given a list of player names
+
+        Accepts a list of player names.  The names must match exactly.  It will
+        return a DataFrame containing tuples for each player name that matches.
+
+        :param names: Player names to lookup
+        :type str: str list
+        :return: Players that match the given names.  If no Series are found an
+            empty DataFrame is returned.
+        :rtype: DataFrame
+
+        >>> In [28]: lk.from_names(['Khris Davis', 'Enrique Hernandez'])
+        >>> Out[28]:
+        >>>       mlb_id           mlb_name mlb_pos mlb_team        mlb_team_long  ...       ottoneu_name  ottoneu_pos  rotowire_id      rotowire_name rotowire_pos
+        >>>       966   571771  Enrique Hernandez      CF      LAD  Los Angeles Dodgers  ...  Enrique Hernandez  1B/2B/SS/OF      11139.0  Enrique Hernandez           SS
+        >>>       1753  501981        Khris Davis      LF      OAK    Oakland Athletics  ...  Khristopher Davis           OF      11664.0        Khris Davis           OF
+        >>>
+        >>> [2 rows x 35 columns]
+        """ # noqa
+        self._read_source()
+        return self.df[(self.df.mlb_name.isin(names)) |
+                       (self.df.bref_name.isin(names)) |
+                       (self.df.cbs_name.isin(names)) |
+                       (self.df.espn_name.isin(names)) |
+                       (self.df.fg_name.isin(names)) |
+                       (self.df.retro_name.isin(names)) |
+                       (self.df.yahoo_name.isin(names)) |
+                       (self.df.ottoneu_name.isin(names)) |
+                       (self.df.rotowire_name.isin(names))]

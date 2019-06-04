@@ -9,6 +9,7 @@ baseball_id
    .. automethod:: from_cbs_ids
    .. automethod:: from_espn_ids
    .. automethod:: from_fangraphs_ids
+   .. automethod:: from_names
 
 .. autoclass:: baseball_id.factory.Factory
 
