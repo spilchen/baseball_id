@@ -7,7 +7,7 @@ def readme():
 
 
 setup(name='baseball_id',
-      version='0.0.5',
+      version='0.0.6',
       description='Lookup baseball players by their ID at various data ' +
                   'sources like MLB, Yahoo!, CBS, ESPN, and FanGraphs.',
       long_description=readme(),

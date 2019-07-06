@@ -17,6 +17,7 @@ it will a return row in a panda's DataFrame that has:
 >>>       dtype='object')
 """
 import pandas as pd
+import numpy as np
 
 
 class Cache:
@@ -164,14 +165,24 @@ class Cache:
         ids_as_str = [str(i) for i in ids]
         return self.df[self.df.fg_id.isin(ids_as_str)]
 
-    def from_names(self, names):
+    def from_names(self, names, filter_missing=None):
         """Lookup given a list of player names
 
         Accepts a list of player names.  The names must match exactly.  It will
         return a DataFrame containing tuples for each player name that matches.
 
+        An optional argument exists to filter based on names and those that
+        have a missing field.  See explanation of the filter_missing parameter.
+
         :param names: Player names to lookup
         :type str: str list
+        :param filter_missing: Optional parameter that allows for additional
+           filtering.  Only players that have this field name missing (Nan)
+           will be returned.  This is useful for use with one of the other ID
+           based lookup where the ID may not be in the database.  For example,
+           set this to 'yahoo_id' to lookup of a rookie who doesn't yet have a
+           yahoo_id in the database.
+        :type filter_missing: str
         :return: Players that match the given names.  If no Series are found an
             empty DataFrame is returned.
         :rtype: DataFrame
@@ -185,12 +196,15 @@ class Cache:
         >>> [2 rows x 35 columns]
         """ # noqa
         self._read_source()
-        return self.df[(self.df.mlb_name.isin(names)) |
-                       (self.df.bref_name.isin(names)) |
-                       (self.df.cbs_name.isin(names)) |
-                       (self.df.espn_name.isin(names)) |
-                       (self.df.fg_name.isin(names)) |
-                       (self.df.retro_name.isin(names)) |
-                       (self.df.yahoo_name.isin(names)) |
-                       (self.df.ottoneu_name.isin(names)) |
-                       (self.df.rotowire_name.isin(names))]
+        flt = (self.df.mlb_name.isin(names)) | \
+            (self.df.bref_name.isin(names)) | \
+            (self.df.cbs_name.isin(names)) | \
+            (self.df.espn_name.isin(names)) | \
+            (self.df.fg_name.isin(names)) | \
+            (self.df.retro_name.isin(names)) | \
+            (self.df.yahoo_name.isin(names)) | \
+            (self.df.ottoneu_name.isin(names)) | \
+            (self.df.rotowire_name.isin(names))
+        if filter_missing is not None:
+            flt &= (np.isnan(self.df[filter_missing]))
+        return self.df[flt]

@@ -1,5 +1,7 @@
 #!/bin/python
 
+import numpy as np
+
 
 def test_lookup_AaronHill_by_mlb_ID(lookup_obj):
     s = lookup_obj.from_mlb_ids([431094])
@@ -85,3 +87,14 @@ def test_lookup_by_name_empty(lookup_obj):
     s = lookup_obj.from_names(['Joe Baseball'])
     print(s)
     assert(len(s) == 0)
+
+
+def test_lookup_by_name_nan_yahoo_id(lookup_obj):
+    # In the fake database, A.J. Jimenez has nan for the yahoo ID.  A.J.
+    # Pollock has a valid yahoo_ID.
+    s = lookup_obj.from_names(['A.J. Jimenez', 'A.J. Pollock'],
+                              filter_missing='yahoo_id')
+    print(s)
+    assert(len(s) == 1)
+    assert(np.isnan(s.iloc(0)[0].yahoo_id))
+    assert(s.iloc(0)[0].mlb_name == 'A.J. Jimenez')
