@@ -53,7 +53,7 @@ Sample API Usage
   
   [3 rows x 35 columns]
   
-  In [3]: Lookup.from_yahoo_ids([10794, 9542, 7578])
+  In [3]: Lookup.from_yahoo_ids(['10794', '9542', '7578'])
   Out[3]:
         mlb_id        mlb_name mlb_pos ... ottoneu_pos rotowire_id   rotowire_name  rotowire_pos
   5     621345     A.J. Minter       P ...          RP     13889.0     A.J. Minter             P
@@ -70,7 +70,7 @@ Sample API Usage
   
   [2 rows x 35 columns]
   
-  In [5]: Lookup.from_espn_ids([29252])
+  In [5]: Lookup.from_espn_ids(['29252'])
   Out[5]:
        mlb_id       mlb_name mlb_pos ...   ottoneu_name ottoneu_pos  rotowire_id  rotowire_name rotowire_pos
   836  451594  Dexter Fowler      RF ...  Dexter Fowler          OF       8271.0  Dexter Fowler           OF
