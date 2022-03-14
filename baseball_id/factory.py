@@ -2,13 +2,14 @@
 
 from baseball_id import lookup
 import importlib.resources as pkg_resources
+import ssl
 
 
 class Factory:
     """Factory methods to construct the ID lookup cache object."""
     @classmethod
     def create(cls):
-        """Factory method to create a cache object from crunchtimebaseball.com
+        """Factory method to create a cache object from github/spilchen/baseball_id_db
 
         This is called as part of package initialization and so can be refered
         to via the Lookup variable.
@@ -16,7 +17,8 @@ class Factory:
         >>> from baseball_id import Lookup
         >>> Lookup.from_yahoo_ids([10794, 9542, 7578])
         """
-        c = lookup.Cache('http://crunchtimebaseball.com/master.csv')
+        ssl._create_default_https_context = ssl._create_unverified_context
+        c = lookup.Cache('https://raw.githubusercontent.com/spilchen/baseball_id_db/main/master.csv')
         return c
 
     @classmethod

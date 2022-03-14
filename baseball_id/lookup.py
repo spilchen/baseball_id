@@ -1,19 +1,18 @@
 #!/bin/python
 
 """
-APIs to lookup into the baseball map stored at http://crunchtimebaseball.com.
+APIs to lookup into the baseball ID at https://github.com/spilchen/baseball_id_db
 
 All of the from_* APIs return a DataFrame that has baseball player
 particulars for the IDs in the lookup.  For each player that it finds
 it will a return row in a panda's DataFrame that has:
 
->>> Index(['mlb_id', 'mlb_name', 'mlb_pos', 'mlb_team', 'mlb_team_long',
->>>        'bats', 'throws', 'birth_year', 'bp_id', 'bref_id', 'bref_name',
->>>        'cbs_id', 'cbs_name', 'cbs_pos', 'espn_id', 'espn_name', 'espn_pos',
->>>        'fg_id', 'fg_name', 'fg_pos', 'lahman_id', 'nfbc_id', 'nfbc_name',
->>>        'nfbc_pos', 'retro_id', 'retro_name', 'debut', 'yahoo_id',
->>>        'yahoo_name', 'ottoneu_id', 'ottoneu_name', 'ottoneu_pos',
->>>        'rotowire_id', 'rotowire_name', 'rotowire_pos'],
+>>> Index(['mlb_id', 'mlb_name', 'mlb_pos', 'bats', 'throws', 'birth_year',
+>>>        'bp_id', 'bref_id', 'bref_name', 'cbs_id', 'cbs_name', 'cbs_pos',
+>>>        'espn_id', 'espn_name', 'espn_pos', 'fg_id', 'fg_name', 'fg_pos',
+>>>        'lahman_id', 'nfbc_id', 'nfbc_name', 'nfbc_pos', 'retro_id',
+>>>        'retro_name', 'debut', 'yahoo_id', 'yahoo_name', 'ottoneu_id',
+>>>        'ottoneu_name', 'ottoneu_pos', 'rotowire_id', 'rotowire_name', 'rotowire_pos'],
 >>>       dtype='object')
 """
 import pandas as pd
@@ -50,12 +49,12 @@ class Cache:
 
         >>> In [1]: lookup.from_mlb_ids([430945, 607680, 669456])
         >>> Out[1]:
-        >>>       mlb_id      mlb_name mlb_pos mlb_team  ... ottoneu_pos rotowire_id rotowire_name  rotowire_pos
-        >>> 39    430945    Adam Jones      CF      ARI  ...          OF      8165.0    Adam Jones            OF
-        >>> 1746  607680  Kevin Pillar      CF       SF  ...          OF     12678.0  Kevin Pillar            OF
-        >>> 2545  669456  Shane Bieber       P      CLE  ...          SP     14383.0  Shane Bieber             P
+        >>>       mlb_id      mlb_name mlb_pos ... ottoneu_pos rotowire_id rotowire_name  rotowire_pos
+        >>> 39    430945    Adam Jones      CF ...          OF      8165.0    Adam Jones            OF
+        >>> 1746  607680  Kevin Pillar      CF ...          OF     12678.0  Kevin Pillar            OF
+        >>> 2545  669456  Shane Bieber       P ...          SP     14383.0  Shane Bieber             P
         >>>
-        >>> [3 rows x 35 columns]
+        >>> [3 rows x 33 columns]
 
         """ # noqa
         self._read_source()
@@ -76,12 +75,12 @@ class Cache:
 
         >>> In [1]: c.from_yahoo_ids([10794, 9542, 7578])
         >>> Out[1]:
-        >>>       mlb_id        mlb_name mlb_pos mlb_team  ... ottoneu_pos rotowire_id   rotowire_name  rotowire_pos
-        >>> 5     621345     A.J. Minter       P      ATL  ...          RP     13889.0     A.J. Minter             P
-        >>> 204   605151  Archie Bradley       P      ARI  ...          RP     12131.0  Archie Bradley             P
-        >>> 2340  448179       Rich Hill       P      LAD  ...          SP      7965.0       Rich Hill             P
+        >>>       mlb_id        mlb_name mlb_pos ... ottoneu_pos rotowire_id   rotowire_name  rotowire_pos
+        >>> 5     621345     A.J. Minter       P ...          RP     13889.0     A.J. Minter             P
+        >>> 204   605151  Archie Bradley       P ...          RP     12131.0  Archie Bradley             P
+        >>> 2340  448179       Rich Hill       P ...          SP      7965.0       Rich Hill             P
         >>>
-        >>> [3 rows x 35 columns]
+        >>> [3 rows x 33 columns]
 
         """ # noqa
         self._read_source()
@@ -102,11 +101,11 @@ class Cache:
 
         >>> In [1]: lookup.from_cbs_ids([1660162, 2507367])
         >>> Out[1]:
-        >>>       mlb_id      mlb_name mlb_pos mlb_team  ... ottoneu_pos rotowire_id rotowire_name  rotowire_pos
-        >>> 423   457763  Buster Posey       C       SF  ...        C/1B     10426.0  Buster Posey             C
-        >>> 1657  665742     Juan Soto      LF      WSH  ...          OF     13960.0     Juan Soto            OF
+        >>>       mlb_id      mlb_name mlb_pos ... ottoneu_pos rotowire_id rotowire_name  rotowire_pos
+        >>> 423   457763  Buster Posey       C ...        C/1B     10426.0  Buster Posey             C
+        >>> 1657  665742     Juan Soto      LF ...          OF     13960.0     Juan Soto            OF
         >>>
-        >>> [2 rows x 35 columns]
+        >>> [2 rows x 33 columns]
 
         """ # noqa
         self._read_source()
@@ -127,10 +126,10 @@ class Cache:
 
         >>> In [1]: c.from_espn_ids([29252])
         >>> Out[1]:
-        >>>      mlb_id       mlb_name mlb_pos mlb_team  ... ottoneu_pos rotowire_id  rotowire_name  rotowire_pos
-        >>> 836  451594  Dexter Fowler      RF      STL  ...          OF      8271.0  Dexter Fowler            OF
+        >>>      mlb_id       mlb_name mlb_pos ... ottoneu_pos rotowire_id  rotowire_name  rotowire_pos
+        >>> 836  451594  Dexter Fowler      RF ...          OF      8271.0  Dexter Fowler            OF
         >>>
-        >>> [1 rows x 35 columns]
+        >>> [1 rows x 33 columns]
 
         """ # noqa
         self._read_source()
@@ -155,7 +154,7 @@ class Cache:
         >>> 1510  642528  Jonathan Loaisiga       P  ...     15256.0  Jonathan Loaisiga            P
         >>> 2133  663993          Nate Lowe      1B  ...         NaN                NaN          NaN
         >>>
-        >>> [2 rows x 35 columns]
+        >>> [2 rows x 33 columns]
 
         """ # noqa
         self._read_source()
@@ -189,11 +188,11 @@ class Cache:
 
         >>> In [28]: lk.from_names(['Khris Davis', 'Enrique Hernandez'])
         >>> Out[28]:
-        >>>       mlb_id           mlb_name mlb_pos mlb_team        mlb_team_long  ...       ottoneu_name  ottoneu_pos  rotowire_id      rotowire_name rotowire_pos
-        >>>       966   571771  Enrique Hernandez      CF      LAD  Los Angeles Dodgers  ...  Enrique Hernandez  1B/2B/SS/OF      11139.0  Enrique Hernandez           SS
-        >>>       1753  501981        Khris Davis      LF      OAK    Oakland Athletics  ...  Khristopher Davis           OF      11664.0        Khris Davis           OF
+        >>>       mlb_id           mlb_name            mlb_pos ...  ottoneu_name  ottoneu_pos  rotowire_id      rotowire_name rotowire_pos
+        >>>       966   571771  Enrique Hernandez      CF      ...  Enrique Hernandez  1B/2B/SS/OF      11139.0  Enrique Hernandez           SS
+        >>>       1753  501981        Khris Davis      LF      ...  Khristopher Davis           OF      11664.0        Khris Davis           OF
         >>>
-        >>> [2 rows x 35 columns]
+        >>> [2 rows x 33 columns]
         """ # noqa
         self._read_source()
         flt = (self.df.mlb_name.isin(names)) | \
