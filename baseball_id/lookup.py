@@ -205,5 +205,5 @@ class Cache:
             (self.df.ottoneu_name.isin(names)) | \
             (self.df.rotowire_name.isin(names))
         if filter_missing is not None:
-            flt &= (np.isnan(self.df[filter_missing]))
+            flt &= (pd.isnull(self.df[filter_missing]))
         return self.df[flt]
